@@ -1,0 +1,31 @@
+.btn-primary {
+  width: 60%;
+  padding: 14px 30px;
+  align-items: center;
+  border: none;
+  border-radius: 25px;
+  background: #E0A75E;
+  color: #000;
+  font-size: 16px;
+  font-weight: 600;
+  margin-top: 30px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+/* .btn-primary:hover {
+  background: linear-gradient(135deg, #ddb17f 0%, #d4a66e 100%);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+  transform: translateY(-2px);
+}  */
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+@media (max-width: 480px) {
+  .btn-primary {
+    padding: 12px 18px;
+    font-size: 15px;
+  }
+}
