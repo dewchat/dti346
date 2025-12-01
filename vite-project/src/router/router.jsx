@@ -1,8 +1,12 @@
 import React from 'react'
 import { Route } from 'react-router-dom'
 import Login from '../pages/Login'
+import Home from '../pages/Home'
+
 const routes = [
-  { path: "/login", element: <SearchRoomPage />,},
+  { path: "/login", element: <Login />,},
+  { path: "/home", element: <Home />,},
+
 ]
 
 const Routes = (
@@ -11,6 +15,7 @@ const Routes = (
       <Route
         key={index}
         path={path}
+        element={element}
       />
     ))}
   </>

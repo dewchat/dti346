@@ -1,17 +1,14 @@
-import React from 'react'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import Login from './pages/Login'
+import { BrowserRouter, Routes as Switch } from "react-router-dom";
+import Routes from "./router/router";
 
 function App() {
   return (
-    <>
-      <Router>
-        <Routes>
-          <Route path="/" element={<Login />} />
-        </Routes>
-      </Router>
-    </>
-  )
+    <BrowserRouter>
+      <Switch>
+        {Routes}
+      </Switch>
+    </BrowserRouter>
+  );
 }
 
-export default App
+export default App;
