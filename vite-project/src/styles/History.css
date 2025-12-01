@@ -1,0 +1,318 @@
+.history-container {
+  min-height: 100vh;
+  background: #f5f5f5;
+  padding-bottom: 100px;
+}
+
+.loading-spinner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  gap: 16px;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #973131;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.history-header {
+  background: #973131;
+  padding: 16px;
+  color: white;
+}
+
+.history-header h1 {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0;
+  text-align: center;
+}
+
+.history-content {
+  padding: 16px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.empty-history {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 60px 20px;
+  color: #666;
+}
+
+.empty-history svg {
+  color: #ccc;
+  margin-bottom: 16px;
+}
+
+.empty-history h2 {
+  font-size: 18px;
+  color: #333;
+  margin: 0 0 8px 0;
+}
+
+.empty-history p {
+  margin: 0 0 24px 0;
+  font-size: 14px;
+}
+
+.browse-btn {
+  background: #973131;
+  color: white;
+  border: none;
+  padding: 12px 28px;
+  border-radius: 24px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.browse-btn:hover {
+  background: #7a2626;
+}
+
+.orders-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.order-card {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.order-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+}
+
+.order-header {
+  padding: 14px 16px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.order-restaurant {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+
+.order-restaurant h3 {
+  font-size: 15px;
+  font-weight: 600;
+  color: #333;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.order-status {
+  font-size: 11px;
+  font-weight: 500;
+  padding: 4px 10px;
+  border-radius: 10px;
+  flex-shrink: 0;
+}
+
+.status-pending {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.status-confirmed {
+  background: #cce5ff;
+  color: #004085;
+}
+
+.status-completed {
+  background: #d4edda;
+  color: #155724;
+}
+
+.status-cancelled {
+  background: #f8d7da;
+  color: #721c24;
+}
+
+.order-date {
+  font-size: 11px;
+  color: #999;
+  margin: 6px 0 0 0;
+}
+
+.order-items {
+  padding: 10px 16px;
+}
+
+.order-item {
+  font-size: 12px;
+  color: #666;
+  margin: 3px 0;
+}
+
+.more-items {
+  font-size: 11px;
+  color: #999;
+  font-style: italic;
+  margin: 4px 0 0 0;
+}
+
+.order-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 16px;
+  background: #f9f9f9;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.pickup-info {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.info-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  color: #666;
+}
+
+.order-total {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+}
+
+.order-total span:first-child {
+  font-size: 11px;
+  color: #666;
+}
+
+.total-amount {
+  font-size: 16px;
+  font-weight: 700;
+  color: #973131;
+}
+
+.order-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 16px;
+  border-top: 1px solid #f0f0f0;
+}
+
+.chat-btn {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: #f5f5f5;
+  color: #666;
+  border: none;
+  padding: 7px 14px;
+  border-radius: 16px;
+  cursor: pointer;
+  font-size: 12px;
+  transition: background 0.2s, color 0.2s;
+}
+
+.chat-btn:hover {
+  background: #973131;
+  color: white;
+}
+
+.chevron-icon {
+  color: #ccc;
+}
+
+/* Tablet styles */
+@media (min-width: 600px) {
+  .history-header {
+    padding: 20px 24px;
+  }
+  
+  .history-header h1 {
+    font-size: 20px;
+  }
+  
+  .history-content {
+    padding: 24px;
+  }
+  
+  .orders-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+  
+  .order-header {
+    padding: 16px;
+  }
+  
+  .order-restaurant h3 {
+    font-size: 16px;
+  }
+  
+  .total-amount {
+    font-size: 18px;
+  }
+}
+
+/* Desktop styles */
+@media (min-width: 768px) {
+  .history-container {
+    padding-left: 250px;
+    padding-bottom: 40px;
+  }
+  
+  .history-header {
+    padding: 20px 32px;
+  }
+  
+  .history-content {
+    padding: 32px;
+  }
+}
+
+/* Large desktop */
+@media (min-width: 1024px) {
+  .orders-list {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Extra large desktop */
+@media (min-width: 1400px) {
+  .orders-list {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}

@@ -1,16 +1,21 @@
-import React, { useState } from 'react';
-import { Home, FileText, MessageCircle, User } from 'lucide-react';
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import { Home, FileText, ShoppingCart, User } from 'lucide-react';
 import '../../styles/Navbar.css';
 
-const Navbar = () => {
-  const [activeNav, setActiveNav] = useState('home');
+const Navbar = ({ activeTab = 'home' }) => {
+  const navigate = useNavigate();
 
   const navItems = [
-    { id: 'home', icon: Home, label: 'หน้าหลัก' },
-    { id: 'documents', icon: FileText, label: 'ประวัติการสั่งซื้อ' },
-    { id: 'messages', icon: MessageCircle, label: 'ข้อความ' },
-    { id: 'profile', icon: User, label: 'โปรไฟล์' }
+    { id: 'home', icon: Home, label: 'หน้าหลัก', path: '/home' },
+    { id: 'history', icon: FileText, label: 'ประวัติ', path: '/history' },
+    { id: 'cart', icon: ShoppingCart, label: 'ตะกร้า', path: '/cart' },
+    { id: 'profile', icon: User, label: 'โปรไฟล์', path: '/profile' }
   ];
+
+  const handleNavClick = (item) => {
+    navigate(item.path);
+  };
 
   return (
     <>
@@ -21,19 +26,20 @@ const Navbar = () => {
           return (
             <button
               key={item.id}
-              onClick={() => setActiveNav(item.id)}
-              className={`nav-item ${activeNav === item.id ? 'active' : ''}`}
+              onClick={() => handleNavClick(item)}
+              className={`nav-item ${activeTab === item.id ? 'active' : ''}`}
             >
               <Icon size={24} />
+              <span className="nav-label">{item.label}</span>
             </button>
           );
         })}
       </nav>
 
-      {/* Always Open Sidebar */}
+      {/* Desktop Sidebar */}
       <div className="sidebar open">
         <div className="sidebar-header">
-          <div className="logo">Logo</div>
+          <div className="logo">🍱 หิ้วให้</div>
         </div>
 
         <div className="sidebar-menu">
@@ -42,8 +48,8 @@ const Navbar = () => {
             return (
               <button
                 key={item.id}
-                onClick={() => setActiveNav(item.id)}
-                className={`sidebar-item ${activeNav === item.id ? 'active' : ''}`}
+                onClick={() => handleNavClick(item)}
+                className={`sidebar-item ${activeTab === item.id ? 'active' : ''}`}
               >
                 <Icon size={20} />
                 <span>{item.label}</span>
