@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { ArrowLeft, Send } from 'lucide-react';
 import { messageAPI, orderAPI } from '../services/api';
+import Navbar from '../components/ui/navbar';
 import '../styles/Chat.css';
 
 function Chat() {
@@ -97,6 +98,7 @@ function Chat() {
 
   return (
     <div className="chat-container">
+      <Navbar/>
       <header className="chat-header">
         <button className="back-button" onClick={() => navigate(-1)}>
           <ArrowLeft size={24} />

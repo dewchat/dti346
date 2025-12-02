@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ArrowLeft, Trash2, Plus, Minus, MapPin, Clock, ShoppingBag } from 'lucide-react';
 import { cartAPI, orderAPI } from '../services/api';
+import Navbar from '../components/ui/navbar';
 import '../styles/Cart.css';
 
 function Cart() {
@@ -95,6 +96,7 @@ function Cart() {
 
   return (
     <div className="cart-container">
+      <Navbar/>
       <header className="cart-header">
         <button className="back-button" onClick={() => navigate(-1)}>
           <ArrowLeft size={24} />
