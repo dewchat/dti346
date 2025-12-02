@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { ArrowLeft, MapPin, Clock, Plus, Minus, ShoppingCart, Check } from 'lucide-react';
+import { ArrowLeft, MapPin, Clock, Plus, Minus, ShoppingCart, Check, MessageCircle, User } from 'lucide-react';
 import { menuAPI, cartAPI, restaurantAPI } from '../services/api';
 import Navbar from '../components/ui/navbar';
 import '../styles/Menu.css';
@@ -64,6 +64,11 @@ function Menu() {
     }
   };
 
+  const handleChatWithDelivery = () => {
+    // Navigate to a pre-order chat or contact page
+    navigate(`/chat-delivery/${restaurantId}`);
+  };
+
   if (loading) {
     return (
       <div className="menu-container">
@@ -99,6 +104,15 @@ function Menu() {
             <span>{restaurant?.pickup_location}</span>
           </div>
         </div>
+        
+        {/* Chat with Delivery Person Button */}
+        <button 
+          className="chat-delivery-btn"
+          onClick={handleChatWithDelivery}
+        >
+          <MessageCircle size={18} />
+          <span>แชทกับผู้รับหิ้ว</span>
+        </button>
       </div>
 
       <main className="menu-content">
@@ -107,6 +121,7 @@ function Menu() {
         {menuItems.length === 0 ? (
           <div className="empty-menu">
             <p>ยังไม่มีเมนูในร้านนี้</p>
+            <p className="empty-hint">ลองแชทสอบถามผู้รับหิ้วได้เลย!</p>
           </div>
         ) : (
           <div className="menu-grid">

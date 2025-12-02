@@ -128,6 +128,7 @@ class Message(db.Model):
     sender_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     receiver_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     order_id = db.Column(db.Integer, db.ForeignKey('order.id'), nullable=True)
+    restaurant_id = db.Column(db.Integer, db.ForeignKey('restaurant.id'), nullable=True)  # For pre-order chat
     content = db.Column(db.Text, nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     is_read = db.Column(db.Boolean, default=False)
@@ -577,6 +578,44 @@ def update_order_status(order_id):
     
     return jsonify({'message': 'Order status updated'}), 200
 
+@app.route('/api/restaurants/<int:restaurant_id>/orders', methods=['GET'])
+def get_restaurant_orders(restaurant_id):
+    user_id = get_current_user_id()
+    if not user_id:
+        return jsonify({'error': 'Authentication required'}), 401
+    
+    restaurant = Restaurant.query.get_or_404(restaurant_id)
+    
+    # Only restaurant owner can view orders
+    if restaurant.user_id != user_id:
+        return jsonify({'error': 'Unauthorized'}), 403
+    
+    orders = Order.query.filter_by(restaurant_id=restaurant_id).order_by(Order.created_at.desc()).all()
+    
+    result = []
+    for order in orders:
+        customer = User.query.get(order.user_id)
+        items = [{
+            'name': item.menu_item.name,
+            'quantity': item.quantity,
+            'price': item.price,
+            'note': item.note
+        } for item in order.order_items]
+        
+        result.append({
+            'id': order.id,
+            'customer_id': order.user_id,
+            'customer_name': customer.display_name if customer else 'Unknown',
+            'total_price': order.total_price,
+            'status': order.status,
+            'pickup_time': order.pickup_time,
+            'pickup_location': order.pickup_location,
+            'created_at': order.created_at.isoformat(),
+            'items': items
+        })
+    
+    return jsonify(result), 200
+
 # ==================== MESSAGE ENDPOINTS ====================
 
 @app.route('/api/messages/<int:order_id>', methods=['GET'])
@@ -648,6 +687,146 @@ def send_message(order_id):
         'message': 'Message sent',
         'id': message.id
     }), 201
+
+# ==================== RESTAURANT CHAT ENDPOINTS (Pre-order) ====================
+
+@app.route('/api/restaurants/<int:restaurant_id>/chat', methods=['GET'])
+def get_restaurant_chat(restaurant_id):
+    user_id = get_current_user_id()
+    if not user_id:
+        return jsonify({'error': 'Authentication required'}), 401
+    
+    restaurant = Restaurant.query.get_or_404(restaurant_id)
+    
+    # Get messages between current user and restaurant owner
+    messages = Message.query.filter(
+        Message.restaurant_id == restaurant_id,
+        db.or_(
+            db.and_(Message.sender_id == user_id, Message.receiver_id == restaurant.user_id),
+            db.and_(Message.sender_id == restaurant.user_id, Message.receiver_id == user_id)
+        )
+    ).order_by(Message.created_at).all()
+    
+    # Mark messages as read
+    for msg in messages:
+        if msg.receiver_id == user_id and not msg.is_read:
+            msg.is_read = True
+    db.session.commit()
+    
+    result = [{
+        'id': msg.id,
+        'sender_id': msg.sender_id,
+        'sender_name': msg.sender.display_name,
+        'content': msg.content,
+        'created_at': msg.created_at.isoformat(),
+        'is_mine': msg.sender_id == user_id
+    } for msg in messages]
+    
+    return jsonify(result), 200
+
+@app.route('/api/restaurants/<int:restaurant_id>/chat', methods=['POST'])
+def send_restaurant_chat(restaurant_id):
+    user_id = get_current_user_id()
+    if not user_id:
+        return jsonify({'error': 'Authentication required'}), 401
+    
+    restaurant = Restaurant.query.get_or_404(restaurant_id)
+    
+    data = request.get_json()
+    content = data.get('content')
+    
+    if not content:
+        return jsonify({'error': 'Message content is required'}), 400
+    
+    # Determine receiver: if sender is owner, get receiver_id from request
+    # Otherwise, receiver is the restaurant owner
+    if user_id == restaurant.user_id:
+        # Owner is responding - need to know who to send to
+        receiver_id = data.get('receiver_id')
+        if not receiver_id:
+            return jsonify({'error': 'Receiver ID required for owner responses'}), 400
+    else:
+        # Customer messaging owner
+        receiver_id = restaurant.user_id
+    
+    message = Message(
+        sender_id=user_id,
+        receiver_id=receiver_id,
+        restaurant_id=restaurant_id,
+        content=content
+    )
+    
+    db.session.add(message)
+    db.session.commit()
+    
+    return jsonify({
+        'message': 'Message sent',
+        'id': message.id,
+        'sender_name': message.sender.display_name,
+        'created_at': message.created_at.isoformat()
+    }), 201
+
+# Get all chat conversations for restaurant owner
+@app.route('/api/restaurants/<int:restaurant_id>/conversations', methods=['GET'])
+def get_restaurant_conversations(restaurant_id):
+    user_id = get_current_user_id()
+    if not user_id:
+        return jsonify({'error': 'Authentication required'}), 401
+    
+    restaurant = Restaurant.query.get_or_404(restaurant_id)
+    
+    # Only owner can see all conversations
+    if restaurant.user_id != user_id:
+        return jsonify({'error': 'Unauthorized'}), 403
+    
+    # Get unique users who have messaged this restaurant
+    subquery = db.session.query(
+        Message.sender_id.label('user_id')
+    ).filter(
+        Message.restaurant_id == restaurant_id,
+        Message.sender_id != user_id
+    ).union(
+        db.session.query(
+            Message.receiver_id.label('user_id')
+        ).filter(
+            Message.restaurant_id == restaurant_id,
+            Message.receiver_id != user_id
+        )
+    ).subquery()
+    
+    users = User.query.join(subquery, User.id == subquery.c.user_id).all()
+    
+    result = []
+    for user in users:
+        # Get last message
+        last_msg = Message.query.filter(
+            Message.restaurant_id == restaurant_id,
+            db.or_(
+                db.and_(Message.sender_id == user.id, Message.receiver_id == user_id),
+                db.and_(Message.sender_id == user_id, Message.receiver_id == user.id)
+            )
+        ).order_by(Message.created_at.desc()).first()
+        
+        # Count unread
+        unread = Message.query.filter(
+            Message.restaurant_id == restaurant_id,
+            Message.sender_id == user.id,
+            Message.receiver_id == user_id,
+            Message.is_read == False
+        ).count()
+        
+        result.append({
+            'user_id': user.id,
+            'user_name': user.display_name,
+            'last_message': last_msg.content if last_msg else '',
+            'last_message_time': last_msg.created_at.isoformat() if last_msg else None,
+            'unread_count': unread
+        })
+    
+    # Sort by last message time
+    result.sort(key=lambda x: x['last_message_time'] or '', reverse=True)
+    
+    return jsonify(result), 200
 
 # ==================== USER ENDPOINTS ====================
 

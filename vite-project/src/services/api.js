@@ -113,6 +113,9 @@ export const orderAPI = {
       method: 'PUT',
       body: JSON.stringify({ status }),
     }),
+
+  getRestaurantOrders: (restaurantId) => 
+    apiCall(`/restaurants/${restaurantId}/orders`),
 };
 
 // Message APIs
@@ -125,6 +128,19 @@ export const messageAPI = {
       method: 'POST',
       body: JSON.stringify({ content }),
     }),
+
+  // Restaurant chat (pre-order)
+  getRestaurantChat: (restaurantId) => 
+    apiCall(`/restaurants/${restaurantId}/chat`),
+
+  sendRestaurantChat: (restaurantId, content, receiverId = null) => 
+    apiCall(`/restaurants/${restaurantId}/chat`, {
+      method: 'POST',
+      body: JSON.stringify({ content, receiver_id: receiverId }),
+    }),
+
+  getRestaurantConversations: (restaurantId) => 
+    apiCall(`/restaurants/${restaurantId}/conversations`),
 };
 
 // User APIs

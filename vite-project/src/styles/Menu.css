@@ -77,6 +77,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
+  margin-bottom: 12px;
 }
 
 .info-row {
@@ -85,6 +86,29 @@
   gap: 6px;
   font-size: 13px;
   color: #666;
+}
+
+/* Chat with Delivery Button */
+.chat-delivery-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 10px 16px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.chat-delivery-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
 }
 
 .menu-content {
@@ -104,6 +128,16 @@
   text-align: center;
   padding: 60px 20px;
   color: #666;
+}
+
+.empty-menu p {
+  margin: 8px 0;
+}
+
+.empty-hint {
+  color: #667eea;
+  font-size: 13px;
+  font-weight: 500;
 }
 
 .menu-grid {

@@ -6,8 +6,10 @@ import Menu from '../pages/Menu'
 import Cart from '../pages/Cart'
 import History from '../pages/History'
 import Chat from '../pages/Chat'
+import ChatDelivery from '../pages/ChatDelivery'
 import Profile from '../pages/Profile'
 import CreateRestaurant from '../pages/CreateRestaurant'
+import MyRestaurantOrders from '../pages/MyRestaurantOrders'
 
 const routes = [
   { path: "/", element: <Login />,},
@@ -16,9 +18,11 @@ const routes = [
   { path: "/cart", element: <Cart />,},
   { path: "/history", element: <History />,},
   { path: "/chat/:orderId", element: <Chat />,},
+  { path: "/chat-delivery/:restaurantId", element: <ChatDelivery />,},
   { path: "/order/:orderId", element: <Chat />,},
   { path: "/profile", element: <Profile />,},
   { path: "/create-restaurant", element: <CreateRestaurant />,},
+  { path: "/my-restaurant/:restaurantId", element: <MyRestaurantOrders />,},
 ]
 
 const Routes = (
