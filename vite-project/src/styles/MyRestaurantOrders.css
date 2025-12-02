@@ -30,7 +30,7 @@
 
 /* Header */
 .my-orders-header {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background:#973131;
   color: white;
   padding: 16px;
   display: flex;
@@ -57,12 +57,14 @@
   font-size: 18px;
   font-weight: 600;
   margin: 0;
+  color: white;
 }
 
 .header-info .subtitle {
   font-size: 12px;
   opacity: 0.8;
   margin: 4px 0 0 0;
+  color: white
 }
 
 /* Filter Tabs */
@@ -91,7 +93,7 @@
 }
 
 .filter-tab.active {
-  background: #667eea;
+  background: #973131;
   color: white;
 }
 
@@ -170,7 +172,7 @@
 .customer-avatar {
   width: 40px;
   height: 40px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: #973131;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -250,7 +252,7 @@
 .item-price {
   font-size: 14px;
   font-weight: 600;
-  color: #667eea;
+  color: #973131;
 }
 
 .item-notes {
@@ -287,7 +289,7 @@
 .total-amount {
   font-size: 18px;
   font-weight: 700;
-  color: #667eea;
+  color: #973131;
 }
 
 /* Order Actions */
@@ -319,7 +321,7 @@
 }
 
 .chat-btn:hover {
-  background: #667eea;
+  background: #973131;
   color: white;
 }
 
@@ -386,8 +388,8 @@
 }
 
 .main-tab.active {
-  color: #667eea;
-  border-bottom-color: #667eea;
+  color: #973131;
+  border-bottom-color: #973131;
 }
 
 .main-tab .tab-badge {
@@ -412,7 +414,7 @@
   gap: 8px;
   width: 100%;
   padding: 14px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: #973131;
   color: white;
   border: none;
   border-radius: 12px;
@@ -484,7 +486,7 @@
 .form-group input:focus,
 .form-group textarea:focus {
   outline: none;
-  border-color: #667eea;
+  border-color: #973131;
 }
 
 .form-group textarea {
@@ -513,7 +515,7 @@
 .submit-modal-btn {
   flex: 1;
   padding: 12px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: #973131;
   color: white;
   border: none;
   border-radius: 10px;
@@ -592,7 +594,7 @@
   margin: 0;
   font-size: 16px;
   font-weight: 700;
-  color: #667eea;
+  color: #973131;
 }
 
 /* Responsive */

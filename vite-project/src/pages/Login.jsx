@@ -42,7 +42,7 @@ const Login = () => {
   return (
     <div className="login-container">
       <div className="login-card">
-        <h1 className="logo-login">🍱 หิ้วให้</h1>
+        <h1 className="logo-login">🍱 หิ้วหิว</h1>
 
         <div className="form-group">
           {error && <p className="error-message">{error}</p>}

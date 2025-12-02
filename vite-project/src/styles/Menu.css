@@ -48,6 +48,7 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  color:white
 }
 
 .back-button,
@@ -96,7 +97,7 @@
   gap: 8px;
   width: 100%;
   padding: 10px 16px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: #973131;
   color: white;
   border: none;
   border-radius: 10px;

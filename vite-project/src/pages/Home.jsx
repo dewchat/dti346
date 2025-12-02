@@ -60,7 +60,7 @@ function Home() {
     <div className="home-container">
       <header className="home-header">
         <div className="header-content">
-          <h1 className="app-title">🍱 หิ้วให้</h1>
+          <h1 className="app-title">🍱 หิ้วหิว</h1>
           <p className="welcome-text">สวัสดี, {user?.display_name || 'User'}</p>
         </div>
       </header>

@@ -73,6 +73,7 @@
   font-size: 11px;
   opacity: 0.8;
   margin: 2px 0 0 0;
+  color: #e0e0e0;
 }
 
 /* Mock Mode Toggle */
@@ -182,6 +183,7 @@
   margin: 0;
   font-size: 14px;
   line-height: 1.4;
+  color: #e0e0e0;
 }
 
 .message-time {

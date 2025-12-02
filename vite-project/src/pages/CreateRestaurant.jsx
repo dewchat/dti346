@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ArrowLeft, Store, Clock, MapPin, Calendar } from 'lucide-react';
 import { restaurantAPI } from '../services/api';
+import Navbar from '../components/ui/navbar';
 import '../styles/CreateRestaurant.css';
 
 function CreateRestaurant() {
@@ -49,6 +50,7 @@ function CreateRestaurant() {
 
   return (
     <div className="create-restaurant-container">
+        <Navbar/>
       <header className="create-header">
         <button className="back-button" onClick={() => navigate(-1)}>
           <ArrowLeft size={24} />

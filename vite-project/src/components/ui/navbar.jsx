@@ -39,7 +39,7 @@ const Navbar = ({ activeTab = 'home' }) => {
       {/* Desktop Sidebar */}
       <div className="sidebar open">
         <div className="sidebar-header">
-          <div className="logo">🍱 หิ้วให้</div>
+          <div className="logo">🍱 หิ้วหิว</div>
         </div>
 
         <div className="sidebar-menu">

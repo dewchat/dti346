@@ -7,7 +7,7 @@
   display: flex;
   align-items: center;
   background: #973131;
-  padding: 16px 20px;
+  padding: 16px;
   color: white;
   position: sticky;
   top: 0;
@@ -21,6 +21,7 @@
   flex: 1;
   text-align: center;
   padding-right: 40px;
+  color: #e0e0e0;
 }
 
 .back-button {
@@ -125,6 +126,6 @@
 /* Desktop styles */
 @media (min-width: 768px) {
   .create-restaurant-container {
-    padding-left: 280px;
+    padding-left: 260px;
   }
 }
