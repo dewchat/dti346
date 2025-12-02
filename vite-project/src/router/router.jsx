@@ -12,29 +12,29 @@ import CreateRestaurant from '../pages/CreateRestaurant'
 import MyRestaurantOrders from '../pages/MyRestaurantOrders'
 
 const routes = [
-  { path: "/", element: <Login />,},
-  { path: "/home", element: <Home />,},
-  { path: "/restaurant/:restaurantId", element: <Menu />,},
-  { path: "/cart", element: <Cart />,},
-  { path: "/history", element: <History />,},
-  { path: "/chat/:orderId", element: <Chat />,},
-  { path: "/chat-delivery/:restaurantId", element: <ChatDelivery />,},
-  { path: "/order/:orderId", element: <Chat />,},
-  { path: "/profile", element: <Profile />,},
-  { path: "/create-restaurant", element: <CreateRestaurant />,},
-  { path: "/my-restaurant/:restaurantId", element: <MyRestaurantOrders />,},
+    { path: "/", element: <Login />, },
+    { path: "/home", element: <Home />, },
+    { path: "/restaurant/:restaurantId", element: <Menu />, },
+    { path: "/cart", element: <Cart />, },
+    { path: "/history", element: <History />, },
+    { path: "/chat/:orderId", element: <Chat />, },
+    { path: "/chat-delivery/:restaurantId", element: <ChatDelivery />, },
+    { path: "/order/:orderId", element: <Chat />, },
+    { path: "/profile", element: <Profile />, },
+    { path: "/create-restaurant", element: <CreateRestaurant />, },
+    { path: "/my-restaurant/:restaurantId", element: <MyRestaurantOrders />, },
 ]
 
 const Routes = (
-  <>
-    {routes.map(({ path, element}, index) => (
-      <Route
-        key={index}
-        path={path}
-        element={element}
-      />
-    ))}
-  </>
-) 
+    <>
+        {routes.map(({ path, element }, index) => (
+            <Route
+                key={index}
+                path={path}
+                element={element}
+            />
+        ))}
+    </>
+)
 
 export default Routes
