@@ -81,7 +81,7 @@
   width: var(--sidebar-width);
   height: 100vh;
   height: 100dvh;
-  background: var(--primary-gradient);
+  background: #973131;
   z-index: 1000;
   display: none;
   flex-direction: column;

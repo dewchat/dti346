@@ -29,7 +29,7 @@
 }
 
 .profile-header {
-  background: var(--primary-gradient);
+  background: #973131;
   padding: var(--space-lg) var(--space-md);
   padding-top: calc(var(--space-lg) + var(--safe-area-top));
   color: var(--text-inverse);
@@ -64,7 +64,7 @@
   width: 70px;
   height: 70px;
   border-radius: var(--radius-full);
-  background: var(--primary-gradient);
+  background: #973131;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -229,7 +229,7 @@
 
 .create-restaurant-btn,
 .add-restaurant-btn {
-  background: var(--primary);
+  background: #973131;
   color: var(--text-inverse);
   border: none;
   padding: var(--space-sm) var(--space-lg);
