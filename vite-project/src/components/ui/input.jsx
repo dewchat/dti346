@@ -1,7 +1,7 @@
 import React from 'react';
 import '../../styles/Input.css';
 
-const Input = ({ type, placeholder, icon: Icon, value, onChange }) => {
+const Input = ({ type, placeholder, icon: Icon, value, onChange, onKeyPress }) => {
   return (
     <div className="input-wrapper">
       <div className="input-icon">
@@ -13,6 +13,7 @@ const Input = ({ type, placeholder, icon: Icon, value, onChange }) => {
         className="input-field"
         value={value}
         onChange={onChange}
+        onKeyPress={onKeyPress}
       />
     </div>
   );
